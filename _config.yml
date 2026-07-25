@@ -1,0 +1,34 @@
+title: "Kit-Ong's Blog"
+description: "Personal blog — thoughts, projects, and news."
+url: "https://kit-ong.github.io"
+baseurl: "/news"
+author:
+  name: "Kit-Ong"
+  github: "Kit-Ong"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /posts/:year/:month/:day/:title/
+
+# Plugins (supported by GitHub Pages)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from build
+exclude:
+  - scripts/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - "*.sh"
+  - vendor/
+
+# Post defaults
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
