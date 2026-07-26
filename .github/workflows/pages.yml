@@ -32,7 +32,7 @@ jobs:
           bundler-cache: true
 
       - name: Build with Jekyll
-        uses: jekyll/jekyll-build-pages@v1
+        uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
