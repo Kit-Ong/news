@@ -1,0 +1,61 @@
+name: Issue or PR to Blog Post
+
+on:
+  issues:
+    types: [opened, labeled]
+  pull_request:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+
+jobs:
+  create-post:
+    # Only run when the 'blog' label is present
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'blog')) ||
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'blog'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Create blog post from Issue
+        if: github.event_name == 'issues'
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_CREATED_AT: ${{ github.event.issue.created_at }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          ISSUE_LABELS: ${{ toJson(github.event.issue.labels.*.name) }}
+        run: python scripts/issue_to_post.py issue
+
+      - name: Create blog post from Pull Request
+        if: github.event_name == 'pull_request'
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_CREATED_AT: ${{ github.event.pull_request.created_at }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
+        run: python scripts/issue_to_post.py pr
+
+      - name: Commit and push new post
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _posts/
+          git diff --cached --quiet || git commit -m "Add blog post from ${{ github.event_name }} #${{ github.event.issue.number || github.event.pull_request.number }}"
+          git push

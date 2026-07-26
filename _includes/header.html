@@ -1,0 +1,10 @@
+<header class="site-header">
+  <div class="container">
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav class="site-nav">
+      <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Blog</a>
+      <a href="{{ '/about' | relative_url }}" {% if page.url == '/about/' or page.url == '/about.html' %}class="active"{% endif %}>About</a>
+      <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+    </nav>
+  </div>
+</header>
