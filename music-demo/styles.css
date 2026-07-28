@@ -385,3 +385,51 @@ input {
     padding: 14px 10px 20px;
   }
 }
+
+.edit-mode-btn {
+  min-height: 38px;
+  border: 0;
+  border-radius: 0;
+}
+
+.edit-mode-btn + .edit-mode-btn {
+  border-left: 1px solid #cbd1dd;
+}
+
+.edit-mode-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+#textPanel textarea {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid #cbd1dd;
+  border-radius: 6px;
+  background: white;
+  color: var(--ink);
+  padding: 9px;
+  font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+#textPanel textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+#textPanel .hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+#textPanel .hint code {
+  background: #e8ecf3;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.82rem;
+}

@@ -31,6 +31,13 @@ layout: null
         </section>
 
         <section class="panel">
+          <div class="segmented" role="group" aria-label="Edit mode">
+            <button class="edit-mode-btn active" data-edit-mode="visual" type="button">Visual</button>
+            <button class="edit-mode-btn" data-edit-mode="text" type="button">Text Editor</button>
+          </div>
+        </section>
+
+        <section class="panel" id="visualPanel">
           <h2>Selected Note</h2>
           <div class="stepper">
             <button id="noteUp" type="button" title="Move selected note higher">&#9650;</button>
@@ -42,6 +49,24 @@ layout: null
             <button id="addBass" type="button">Add Bass</button>
             <button id="deleteNote" type="button">Delete</button>
             <button id="snapScale" type="button">Snap To Scale</button>
+          </div>
+        </section>
+
+        <section class="panel" id="textPanel" style="display:none">
+          <h2>Text Editor</h2>
+          <p class="hint">Enter notes separated by spaces. Use <code>|</code> for bar lines. Use <code>#</code> for sharps and <code>b</code> for flats.<br>
+          Prefix line with <code>T:</code> for treble or <code>B:</code> for bass.</p>
+          <label>
+            Treble
+            <textarea id="trebleText" rows="4" placeholder="C5 C5 C5 C5 | Eb5 Eb5 G5 Bb5" spellcheck="false"></textarea>
+          </label>
+          <label>
+            Bass
+            <textarea id="bassText" rows="4" placeholder="Ab2 Eb3 Ab3 C4 | Bb2 F3 Bb3 D4" spellcheck="false"></textarea>
+          </label>
+          <div class="grid-actions">
+            <button id="applyText" type="button">Apply</button>
+            <button id="refreshText" type="button">Refresh</button>
           </div>
         </section>
 
