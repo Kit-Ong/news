@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scale Studio Composer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <aside class="sidebar" aria-label="Composer controls">
+        <section class="brand">
+          <p class="eyebrow">Scale Studio</p>
+          <h1>Grand Staff Composer</h1>
+        </section>
+
+        <section class="panel">
+          <h2>Lesson</h2>
+          <label>
+            Key
+            <select id="keySelect"></select>
+          </label>
+          <div class="segmented" role="group" aria-label="Scale mode">
+            <button class="mode-btn active" data-mode="major" type="button">Major</button>
+            <button class="mode-btn" data-mode="minor" type="button">Minor</button>
+          </div>
+          <div id="scaleNotes" class="scale-notes" aria-live="polite"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Selected Note</h2>
+          <div class="stepper">
+            <button id="noteUp" type="button" title="Move selected note higher">&#9650;</button>
+            <output id="selectedNote">C4</output>
+            <button id="noteDown" type="button" title="Move selected note lower">&#9660;</button>
+          </div>
+          <div class="grid-actions">
+            <button id="addTreble" type="button">Add Treble</button>
+            <button id="addBass" type="button">Add Bass</button>
+            <button id="deleteNote" type="button">Delete</button>
+            <button id="snapScale" type="button">Snap To Scale</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Sheet</h2>
+          <label>
+            Title
+            <input id="titleInput" type="text" value="ICARUS STUDY" />
+          </label>
+          <label>
+            Tempo
+            <input id="tempoInput" type="number" min="40" max="220" value="100" />
+          </label>
+          <div class="grid-actions">
+            <button id="loadSample" type="button">Load Sample</button>
+            <button id="exportJson" type="button">Export</button>
+            <label class="file-button">
+              Import
+              <input id="importJson" type="file" accept="application/json,.json" />
+            </label>
+          </div>
+        </section>
+      </aside>
+
+      <section class="score-area" aria-label="Sheet music editor">
+        <header class="score-toolbar">
+          <div class="transport" role="group" aria-label="Playback controls">
+            <button id="playBtn" class="icon-btn" type="button" title="Play">&#9654;</button>
+            <button id="pauseBtn" class="icon-btn" type="button" title="Pause">&#8545;</button>
+            <button id="stopBtn" class="icon-btn" type="button" title="Stop">&#9632;</button>
+          </div>
+          <div class="status" aria-live="polite">Ready</div>
+        </header>
+
+        <article class="paper">
+          <div class="score-heading">
+            <input id="scoreTitle" class="score-title" value="ICARUS STUDY" aria-label="Score title" />
+            <input id="composerInput" class="composer" value="Scale lesson" aria-label="Composer" />
+          </div>
+          <svg id="scoreSvg" viewBox="0 0 1120 610" role="img" aria-label="Editable grand staff sheet music"></svg>
+        </article>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
